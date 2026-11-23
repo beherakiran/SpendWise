@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Transactions() {
   const transactions = [
     {
@@ -27,9 +29,9 @@ function Transactions() {
             <h1 className="text-3xl text-blue-800 font-bold">Transactions</h1>
           </div>
 
-          <button className="rounded-lg bg-blue-600 px-5 py-3 text-center text-sm font-medium text-white hover:bg-blue-700">
+          <Link to="/add-transaction" className="rounded-lg bg-blue-600 px-5 py-3 text-center text-sm font-medium text-white hover:bg-blue-700">
             + Add Transaction
-          </button>
+          </Link>
         </div>
         <div className="mb-6 rounded-xl  p-5 shadow-sm">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
