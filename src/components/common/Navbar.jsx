@@ -3,7 +3,7 @@ import { CircleUserRound, LogOut } from "lucide-react";
 function Navbar() {
   return (
     <>
-      <header className="flex justify-end items-center gap-5 bg-[#E4EDFB] p-5">
+      <header className="flex justify-end items-center gap-5 bg-[#bfd1ed] p-5">
       <span className="text-sm font-medium text-gray-600">
         Welcome, Supriya
       </span>
