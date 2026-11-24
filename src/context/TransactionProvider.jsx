@@ -1,8 +1,8 @@
-import { useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage.js"
 import { TransactionContext } from "./TransactionContext";
 
 function TransactionProvider({ children }) {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useLocalStorage("transactions",[]);
 
   return (
     <>
