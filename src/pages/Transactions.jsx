@@ -1,26 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { TransactionContext } from "../context/TransactionContext";
 
 function Transactions() {
-  const transactions = [
-    {
-      id: 1,
-      title: "Monthly Salary",
-      category: "Income",
-      note: "November salary",
-      date: "2026-11-20",
-      amount: 35000,
-      type: "income",
-    },
-    {
-      id: 2,
-      title: "Grocery Shopping",
-      category: "Food",
-      note: "lunch",
-      date: "2026-11-19",
-      amount: 2500,
-      type: "expense",
-    },
-  ];
+  const { transactions } = useContext(TransactionContext);
+
   return (
     <>
       <div className="min-h-screen p-6">
@@ -29,7 +13,10 @@ function Transactions() {
             <h1 className="text-3xl text-blue-800 font-bold">Transactions</h1>
           </div>
 
-          <Link to="/add-transaction" className="rounded-lg bg-blue-600 px-5 py-3 text-center text-sm font-medium text-white hover:bg-blue-700">
+          <Link
+            to="/add-transaction"
+            className="rounded-lg bg-blue-600 px-5 py-3 text-center text-sm font-medium text-white hover:bg-blue-700"
+          >
             + Add Transaction
           </Link>
         </div>
@@ -85,56 +72,64 @@ function Transactions() {
               </thead>
 
               <tbody>
-                {transactions.map((transaction) => (
-                  <tr
-                    key={transaction.id}
-                    className="border-t border-gray-100 text-sm"
-                  >
-                    <td className="px-5 py-4 font-medium text-gray-800">
-                      {transaction.title}
-                    </td>
+                {transactions.length > 0 ? (
+                  transactions.map((transaction) => (
+                    <tr
+                      key={transaction.id}
+                      className="border-t border-gray-100 text-sm"
+                    >
+                      <td className="px-5 py-4 font-medium text-gray-800">
+                        {transaction.title}
+                      </td>
 
-                    <td className="px-5 py-4 text-gray-500">
-                      {transaction.category}
-                    </td>
+                      <td className="px-5 py-4 text-gray-500">
+                        {transaction.category}
+                      </td>
 
-                    <td className="px-5 py-4 text-gray-500">
-                      {transaction.date}
-                    </td>
+                      <td className="px-5 py-4 text-gray-500">
+                        {transaction.date}
+                      </td>
 
-                    <td className="px-5 py-4">
-                      <span
-                        className={`rounded-full px-3 py-1 text-xs font-medium ${
+                      <td className="px-5 py-4">
+                        <span
+                          className={`rounded-full px-3 py-1 text-xs font-medium ${
+                            transaction.type === "income"
+                              ? "bg-green-100 text-green-700"
+                              : "bg-red-100 text-red-600"
+                          }`}
+                        >
+                          {transaction.type}
+                        </span>
+                      </td>
+
+                      <td
+                        className={`px-5 py-4 text-right font-semibold ${
                           transaction.type === "income"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-red-100 text-red-600"
+                            ? "text-green-600"
+                            : "text-red-500"
                         }`}
                       >
-                        {transaction.type}
-                      </span>
-                    </td>
+                        {transaction.type === "income" ? "+" : "-"}₹
+                        {transaction.amount.toLocaleString("en-IN")}
+                      </td>
 
-                    <td
-                      className={`px-5 py-4 text-right font-semibold ${
-                        transaction.type === "income"
-                          ? "text-green-600"
-                          : "text-red-500"
-                      }`}
-                    >
-                      {transaction.type === "income" ? "+" : "-"}₹
-                      {transaction.amount.toLocaleString("en-IN")}
-                    </td>
-
-                    <td className="px-5 py-4 text-center">
-                      <button className="mr-3 font-medium text-blue-600">
-                        Edit
-                      </button>
-                      <button className="font-medium text-red-500">
-                        Delete
-                      </button>
+                      <td className="px-5 py-4 text-center">
+                        <button className="mr-3 font-medium text-blue-600">
+                          Edit
+                        </button>
+                        <button className="font-medium text-red-500">
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center py-8 text-gray-500">
+                      No transactions found. Add your first transaction!
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>

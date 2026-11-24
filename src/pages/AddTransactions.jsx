@@ -1,8 +1,35 @@
+import { useContext, useEffect } from "react";
+import { TransactionContext } from "../context/TransactionContext";
+import { useNavigate } from "react-router-dom";
+
 function AddTransactions() {
-  const handleSubmit = (e)=>{
-      e.preventDefault();
-      console.log("form submitted")
-  }
+  const {transactions,setTransactions} = useContext(TransactionContext)
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("form submitted");
+
+    const form = e.target;
+
+    const transaction = {
+      id: Date.now(),
+      title: form.title.value,
+      amount: Number(form.amount.value),
+      type: form.type.value,
+      category: form.category.value,
+      date: form.date.value,
+      note: form.note.value,
+    };
+
+    setTransactions([...transactions , transaction]);
+    form.reset();
+    navigate("/transactions")
+    //console.log(transaction)
+  };
+
+   useEffect(() => {
+  console.log(transactions);
+}, [transactions]);
 
   return (
     <>
@@ -12,7 +39,10 @@ function AddTransactions() {
             Add Transaction
           </h1>
 
-          <form  onSubmit={handleSubmit} className="w-full rounded-xl border border-blue-100 p-6 shadow-sm space-y-3 bg-white">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full rounded-xl border border-blue-100 p-6 shadow-sm space-y-3 bg-white"
+          >
             <div className="flex flex-col gap-3">
               <label className="font-medium text-xl" htmlFor="title">
                 Title
@@ -35,8 +65,8 @@ function AddTransactions() {
                 placeholder="₹Enter Amount"
                 id="amount"
                 name="amount"
-                 min="0.01"
-                  step="0.01"
+                min="0.01"
+                step="0.01"
                 required
                 className="rounded-lg border border-blue-400 px-4 py-3 outline-none focus:border-blue-500"
               />

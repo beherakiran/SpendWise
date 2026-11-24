@@ -6,9 +6,11 @@ import Transactions from "./pages/Transactions";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import AddTransactions from "./pages/AddTransactions";
+import TransactionProvider from "./context/TransactionProvider";
 
 function App() {
   return (
+    <TransactionProvider>
     <Routes>
       <Route element={<RootLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
@@ -20,6 +22,7 @@ function App() {
 
       <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
+    </TransactionProvider>
   );
 }
 
