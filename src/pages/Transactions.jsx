@@ -1,9 +1,25 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TransactionContext } from "../context/TransactionContext";
+import { toast } from "react-toastify";
 
 function Transactions() {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions, setTransactions } = useContext(TransactionContext);
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this transaction?",
+    );
+    if (confirmDelete) {
+      const updatedTransactions = transactions.filter(
+        (transaction) => transaction.id !== id,
+      );
+      setTransactions(updatedTransactions);
+      toast.success("Transaction Deleted Successfully !");
+    }
+  };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -114,10 +130,18 @@ function Transactions() {
                       </td>
 
                       <td className="px-5 py-4 text-center">
-                        <button className="mr-3 font-medium text-blue-600">
+                        <button
+                          onClick={() =>
+                            navigate(`/edit-transaction/${transaction.id}`)
+                          }
+                          className="mr-3 font-medium text-blue-600"
+                        >
                           Edit
                         </button>
-                        <button className="font-medium text-red-500">
+                        <button
+                          onClick={() => handleDelete(transaction.id)}
+                          className="font-medium text-red-500"
+                        >
                           Delete
                         </button>
                       </td>

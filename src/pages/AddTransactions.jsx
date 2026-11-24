@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AddTransactions() {
-  const {transactions,setTransactions} = useContext(TransactionContext)
+  const { transactions, setTransactions } = useContext(TransactionContext);
   const navigate = useNavigate();
+   const { id } = useParams();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("form submitted");
@@ -12,7 +13,7 @@ function AddTransactions() {
     const form = e.target;
 
     const transaction = {
-      id: Date.now(),
+      id:id ?Number(id): Date.now(),
       title: form.title.value,
       amount: Number(form.amount.value),
       type: form.type.value,
@@ -21,22 +22,36 @@ function AddTransactions() {
       note: form.note.value,
     };
 
-    setTransactions([...transactions , transaction]);
+    if(id){
+      const updatedTransactions = transactions.map((item)=>
+        item.id === Number(id) ? transaction : item
+      );
+      setTransactions(updatedTransactions)
+    }else{
+      setTransactions([...transactions, transaction]);
+    }
+
     form.reset();
-    navigate("/transactions")
+    navigate("/transactions");
     //console.log(transaction)
   };
 
-   useEffect(() => {
-  console.log(transactions);
-}, [transactions]);
+  //    useEffect(() => {
+  //   console.log(transactions);
+  // }, [transactions]);
+
+  
+
+  const existingTransaction = transactions.find(
+    (transaction) => transaction.id === Number(id),
+  );
 
   return (
     <>
       <div className="min-h-screen mx-auto p-5 bg-blue-50">
         <div className="mx-auto max-w-3xl ">
           <h1 className="mb-6 text-2xl text-center text-blue-800 font-bold">
-            Add Transaction
+              {id ? "Edit Transaction" : "Add Transaction"}
           </h1>
 
           <form
@@ -52,6 +67,7 @@ function AddTransactions() {
                 placeholder="e.g grocery shopping..."
                 name="title"
                 id="title"
+                 defaultValue={existingTransaction?.title || ""}
                 required
                 className="rounded-lg border border-blue-400 px-4 py-3 outline-none focus:border-blue-500"
               />
@@ -67,6 +83,7 @@ function AddTransactions() {
                 name="amount"
                 min="0.01"
                 step="0.01"
+                defaultValue={existingTransaction?.amount || ""}
                 required
                 className="rounded-lg border border-blue-400 px-4 py-3 outline-none focus:border-blue-500"
               />
@@ -79,6 +96,7 @@ function AddTransactions() {
               <select
                 id="type"
                 name="type"
+                defaultValue={existingTransaction?.type || ""}
                 required
                 className="rounded-lg border border-blue-400 px-4 py-3"
               >
@@ -94,6 +112,7 @@ function AddTransactions() {
               <select
                 id="category"
                 name="category"
+                defaultValue={existingTransaction?.category || ""}
                 required
                 className="rounded-lg border border-blue-400 px-4 py-3 outline-none focus:border-blue-500"
               >
@@ -114,6 +133,7 @@ function AddTransactions() {
                 placeholder="DD/MM/YY"
                 id="date"
                 name="date"
+                defaultValue={existingTransaction?.date || ""}
                 required
                 className="rounded-lg border border-blue-400 px-4 py-3 outline-none focus:border-blue-500"
               />
@@ -127,6 +147,7 @@ function AddTransactions() {
                 name="note"
                 placeholder="Add a description..."
                 rows="3"
+                defaultValue={existingTransaction?.note || ""}
                 required
                 className="rounded-lg border border-blue-400 px-4 py-3 outline-none focus:border-blue-500"
               />
@@ -135,7 +156,7 @@ function AddTransactions() {
               type="submit"
               className="bg-blue-500 block mx-auto rounded-md px-4 py-2 text-white mt-4 hover:bg-blue-700 transition"
             >
-              Add Transaction
+             {id ? "Update Transaction" : "Add Transaction"}
             </button>
           </form>
         </div>
