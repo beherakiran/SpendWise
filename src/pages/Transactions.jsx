@@ -1,10 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TransactionContext } from "../context/TransactionContext";
 import { toast } from "react-toastify";
 
 function Transactions() {
   const { transactions, setTransactions } = useContext(TransactionContext);
+
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
+  const [month, setMonth] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm(
@@ -18,6 +23,36 @@ function Transactions() {
       toast.success("Transaction Deleted Successfully !");
     }
   };
+
+  //Search by note
+  let filteredTransactions = transactions.filter((transaction) =>
+    transaction.note.toLowerCase().includes(search.toLowerCase()),
+  );
+
+  // Filter by category
+  if (category !== "all") {
+    filteredTransactions = filteredTransactions.filter(
+      (transaction) => transaction.category === category,
+    );
+  }
+
+  // Filter by month
+  if (month !== "") {
+    filteredTransactions = filteredTransactions.filter((transaction) =>
+      transaction.date.startsWith(month),
+    );
+  }
+
+  // Sort 
+  if (sortBy === "amount-low") {
+    filteredTransactions.sort((a, b) => a.amount - b.amount);
+  } else if (sortBy === "amount-high") {
+    filteredTransactions.sort((a, b) => b.amount - a.amount);
+  } else if (sortBy === "date-new") {
+    filteredTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } else if (sortBy === "date-old") {
+    filteredTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+  }
 
   const navigate = useNavigate();
 
@@ -41,28 +76,41 @@ function Transactions() {
             <input
               type="text"
               placeholder="Search by note..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="rounded-lg border border-blue-200 px-4 py-3 text-sm outline-none focus:border-blue-500"
             />
 
-            <select className="rounded-lg border border-blue-200 px-4 py-3 text-sm">
-              <option>All Categories</option>
-              <option>Food</option>
-              <option>Bills</option>
-              <option>Personal</option>
-              <option>Income</option>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="rounded-lg border border-blue-200 px-4 py-3 text-sm"
+            >
+              <option value="all">all </option>
+              <option value="food">food</option>
+              <option value="bills">bills</option>
+              <option value="personal">personal</option>
+              <option value="shopping">Shopping</option>
+              <option value="travel">Travel</option>
             </select>
 
             <input
               type="month"
+              value={month}
+              onChange={(e) => setMonth(e.target.value)}
               className="rounded-lg border border-blue-200 px-4 py-3 text-sm"
             />
 
-            <select className="rounded-lg border border-blue-200 px-4 py-3 text-sm">
-              <option>Sort By</option>
-              <option>Amount: Low to High</option>
-              <option>Amount: High to Low</option>
-              <option>Date: Newest First</option>
-              <option>Date: Oldest First</option>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="rounded-lg border border-blue-200 px-4 py-3 text-sm"
+            >
+              <option value="">Sort By</option>
+              <option value={"amount-low"}>Amount: Low to High</option>
+              <option value={'amount-high'}>Amount: High to Low</option>
+              <option value={"date-new"}>Date: Newest First</option>
+              <option value={"date-old"}>Date: Oldest First</option>
             </select>
           </div>
         </div>
@@ -70,7 +118,7 @@ function Transactions() {
         <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
           <div className="border-b border-gray-100 p-5">
             <h2 className="text-lg font-semibold text-blue-800">
-              All Transactions
+              All Transactions ({filteredTransactions.length})
             </h2>
           </div>
 
@@ -88,8 +136,8 @@ function Transactions() {
               </thead>
 
               <tbody>
-                {transactions.length > 0 ? (
-                  transactions.map((transaction) => (
+                {filteredTransactions.length > 0 ? (
+                  filteredTransactions.map((transaction) => (
                     <tr
                       key={transaction.id}
                       className="border-t border-gray-100 text-sm"
@@ -150,7 +198,8 @@ function Transactions() {
                 ) : (
                   <tr>
                     <td colSpan="6" className="text-center py-8 text-gray-500">
-                      No transactions found. Add your first transaction!
+                      No transactions found. Add your transaction! or try
+                      changing your filter.
                     </td>
                   </tr>
                 )}
