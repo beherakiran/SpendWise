@@ -1,7 +1,29 @@
-// import { useContext, useState } from "react";
-// import { TransactionContext } from "../context/TransactionContext";
+import { useContext, useState } from "react";
+import { TransactionContext } from "../context/TransactionContext";
 
 function Reports() {
+  const { transactions } = useContext(TransactionContext);
+
+  const [selectedMonth, setSelectedMonth] = useState("2026-11");
+
+  const monthlyTransactions = transactions.filter((transaction) => {
+    return transaction.date.startsWith(selectedMonth);
+  });
+
+  //console.log(monthlyTransactions);
+
+  let totalIncome = 0;
+  let totalExpense = 0;
+
+  for (let i = 0; i < monthlyTransactions.length; i++) {
+    if (monthlyTransactions[i].type === "income") {
+      totalIncome = totalIncome + Number(monthlyTransactions[i].amount);
+    } else if (monthlyTransactions[i].type === "expense") {
+      totalExpense = totalExpense + Number(monthlyTransactions[i].amount);
+    }
+  }
+ const savings = totalIncome - totalExpense;
+ console.log(savings);
  
 
   return (
@@ -15,29 +37,31 @@ function Reports() {
 
           <input
             type="month"
-            defaultValue="2026-11"
-            className="rounded-lg border border-blue-300 bg-white px-4 py-2 outline-none"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            className="rounded-lg border border-gray-300 bg-white px-4 py-2 outline-none focus:border-blue-500"
           />
         </div>
 
+    
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
             <p className="text-sm text-gray-500">Total Income</p>
-            <h2 className="mt-3 text-2xl font-bold text-green-600">₹45,000</h2>
+            <h2 className="mt-3 text-2xl font-bold text-green-600">₹{totalIncome.toLocaleString("en-IN")}</h2>
           </div>
 
           <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
             <p className="text-sm text-gray-500">Total Expenses</p>
-            <h2 className="mt-3 text-2xl font-bold text-red-500">₹18,500</h2>
+            <h2 className="mt-3 text-2xl font-bold text-red-500">₹{totalExpense.toLocaleString("en-IN")}</h2>
           </div>
 
           <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
             <p className="text-sm text-gray-500">Net Savings</p>
-            <h2 className="mt-3 text-2xl font-bold text-blue-700">₹26,500</h2>
+            <h2 className="mt-3 text-2xl font-bold text-blue-700">₹{savings.toLocaleString("en-IN")}</h2>
           </div>
         </div>
 
-      
+        
         <div className="mt-8 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-blue-800">
             Expense Breakdown
@@ -127,7 +151,7 @@ function Reports() {
           </div>
         </div>
 
-      
+        
         <div className="mt-8 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-blue-800">
             Income Breakdown
