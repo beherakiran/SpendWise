@@ -55,7 +55,39 @@ function Reports() {
     }
   }
 
-  console.log(expenseCategories);
+ // console.log(expenseCategories);
+
+ const incomeCategories = [];
+
+for (let i = 0; i < monthlyTransactions.length; i++) {
+  const transaction = monthlyTransactions[i];
+
+  if (transaction.type === "income") {
+    const existingCategory = incomeCategories.find(
+      (item) => item.category === transaction.category
+    );
+
+    if (existingCategory) {
+      existingCategory.amount += Number(transaction.amount);
+    } else {
+      incomeCategories.push({
+        category: transaction.category,
+        amount: Number(transaction.amount),
+      });
+    }
+  }
+}
+
+for (let i = 0; i < incomeCategories.length; i++) {
+  if (totalIncome > 0) {
+    incomeCategories[i].percentage =
+      (incomeCategories[i].amount / totalIncome) * 100;
+  } else {
+    incomeCategories[i].percentage = 0;
+  }
+}
+
+//console.log(incomeCategories);
 
   return (
     <>
