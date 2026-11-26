@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 
 function Dashboard() {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions, monthlyBudget } = useContext(TransactionContext);
 
   const today = new Date();
   const currentMonth = today.getMonth();
@@ -33,8 +33,6 @@ function Dashboard() {
   const monthlyExpense = monthlyTransactions
     .filter((item) => item.type === "expense")
     .reduce((total, item) => total + Number(item.amount), 0);
-
-  const monthlyBudget = 10000;
 
   const budgetUsed =
     monthlyBudget > 0 ? (monthlyExpense / monthlyBudget) * 100 : 0;
@@ -99,10 +97,15 @@ function Dashboard() {
             ></div>
           </div>
 
-          <p className="mt-3 text-sm text-gray-600">
-            {budgetUsed.toFixed(1)}% of your budget used.
-          </p>
-
+          {monthlyBudget > 0 ? (
+            <p className="mt-3 text-sm text-gray-600">
+              {budgetUsed.toFixed(1)}% of your budget used.
+            </p>
+          ) : (
+            <p className="mt-3 text-sm text-gray-600">
+              Set a monthly budget to track your spending.
+            </p>
+          )}
           {budgetUsed >= 80 && (
             <p className="mt-2 text-sm font-medium text-red-500">
               {budgetUsed >= 100
