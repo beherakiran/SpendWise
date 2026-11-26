@@ -55,39 +55,39 @@ function Reports() {
     }
   }
 
- // console.log(expenseCategories);
+  // console.log(expenseCategories);
 
- const incomeCategories = [];
+  const incomeCategories = [];
 
-for (let i = 0; i < monthlyTransactions.length; i++) {
-  const transaction = monthlyTransactions[i];
+  for (let i = 0; i < monthlyTransactions.length; i++) {
+    const transaction = monthlyTransactions[i];
 
-  if (transaction.type === "income") {
-    const existingCategory = incomeCategories.find(
-      (item) => item.category === transaction.category
-    );
+    if (transaction.type === "income") {
+      const existingCategory = incomeCategories.find(
+        (item) => item.category === transaction.category,
+      );
 
-    if (existingCategory) {
-      existingCategory.amount += Number(transaction.amount);
-    } else {
-      incomeCategories.push({
-        category: transaction.category,
-        amount: Number(transaction.amount),
-      });
+      if (existingCategory) {
+        existingCategory.amount += Number(transaction.amount);
+      } else {
+        incomeCategories.push({
+          category: transaction.category,
+          amount: Number(transaction.amount),
+        });
+      }
     }
   }
-}
 
-for (let i = 0; i < incomeCategories.length; i++) {
-  if (totalIncome > 0) {
-    incomeCategories[i].percentage =
-      (incomeCategories[i].amount / totalIncome) * 100;
-  } else {
-    incomeCategories[i].percentage = 0;
+  for (let i = 0; i < incomeCategories.length; i++) {
+    if (totalIncome > 0) {
+      incomeCategories[i].percentage =
+        (incomeCategories[i].amount / totalIncome) * 100;
+    } else {
+      incomeCategories[i].percentage = 0;
+    }
   }
-}
 
-//console.log(incomeCategories);
+  //console.log(incomeCategories);
 
   return (
     <>
@@ -172,25 +172,26 @@ for (let i = 0; i < incomeCategories.length; i++) {
           </p>
 
           <div className="space-y-5">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-              <div>
-                <p className="font-medium text-gray-700">Salary</p>
-                <p className="mt-1 text-xs text-gray-400">
-                  88.9% of total income
-                </p>
-              </div>
-              <p className="font-semibold text-green-600">₹40,000</p>
-            </div>
-
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-              <div>
-                <p className="font-medium text-gray-700">Freelance</p>
-                <p className="mt-1 text-xs text-gray-400">
-                  11.1% of total income
-                </p>
-              </div>
-              <p className="font-semibold text-green-600">₹5,000</p>
-            </div>
+            {incomeCategories.length > 0 ? (
+              incomeCategories.map((item) => (
+                <div
+                  key={item.category}
+                  className="flex items-center justify-between border-b border-gray-100 pb-4"
+                >
+                  <div>
+                    <p className="font-medium text-gray-700"> {item.category}</p>
+                    <p className="mt-1 text-xs text-gray-400">
+                       {item.percentage.toFixed(1)}%of total income
+                    </p>
+                  </div>
+                  <p className="font-semibold text-green-600">  ₹{item.amount.toLocaleString("en-IN")}</p>
+                </div>
+              ))
+            ) : (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No income for this month.
+              </p>
+            )}
           </div>
         </div>
       </div>
