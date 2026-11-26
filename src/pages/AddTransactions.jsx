@@ -122,6 +122,9 @@ function AddTransactions() {
                 <option value="shopping">Shopping</option>
                 <option value="travel">Travel</option>
                 <option value="personal">Personal</option>
+                <option value="salary">Salary</option>
+                <option value="investment">Investment</option>
+                <option value="other">other</option>
               </select>
             </div>
             <div className="flex flex-col gap-3">
