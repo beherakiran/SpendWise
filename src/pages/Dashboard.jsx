@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 import { useNavigate } from "react-router-dom";
 import { Wallet} from "lucide-react";
+import EmptyState from "../components/common/EmptyState";
+import PageHeader from "../components/common/PageHeader";
 
 function Dashboard() {
   const { transactions, monthlyBudget } = useContext(TransactionContext);
@@ -51,9 +53,7 @@ function Dashboard() {
   return (
     <>
       <div className="min-h-screen p-3 sm:p-5 lg:p-6 w-full ">
-        <div className="mb-8">
-          <h1 className="text-xl sm:text-2xl text-blue-800 font-bold">Dashboard</h1>
-        </div>
+       <PageHeader title="Dashboard" />
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-xl bg-blue-100 p-5 shadow-sm">
@@ -153,22 +153,19 @@ function Dashboard() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-6">
-            <div className="bg-blue-50 p-4 rounded-full mb-4">
-               <Wallet size={32} className="text-blue-600" />
-             </div>
-           
-            <p className="p-8 text-center text-gray-500">
-              No transactions yet. Add your first transaction!
-            </p>
-            <button
-              onClick={() => navigate("/add-transaction")}
-              className="mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl
-              font-medium hover:bg-blue-700 transition"
-             >
-              + Add Transaction
-             </button>
-             </div>
+           <EmptyState
+            icon={<Wallet size={32} className="text-blue-600" />}
+            message="No transactions yet. Add your first transaction!"
+            >
+             <button
+               onClick={() => navigate("/add-transaction")}
+               className="mt-4 rounded-xl bg-blue-600 px-5 py-3
+              font-medium text-white transition hover:bg-blue-700"
+              >
+               + Add Transaction
+              </button>
+          </EmptyState>
+             
           )}
         </div>
       </div>

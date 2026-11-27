@@ -2,6 +2,7 @@ import { Wallet, IndianRupee, Save,Globe } from "lucide-react";
 import { useContext, useState } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 import { toast } from "react-toastify";
+import PageHeader from "../components/common/PageHeader";
 
 function Settings() {
   const { transactions, monthlyBudget, setMonthlyBudget } =
@@ -62,9 +63,7 @@ function Settings() {
   return (
     <>
       <div className="min-h-screen p-5 sm:p-6">
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-blue-800">Settings</h1>
-        </div>
+       <PageHeader title="Settings"/>
         <div className="mb-6 rounded-xl border border-gray-100 bg-white p-6 shadow-sm max-w-3xl">
           <div className="mb-6 flex items-center gap-3">
             <div className="rounded-lg bg-blue-50 p-3 text-blue-600">

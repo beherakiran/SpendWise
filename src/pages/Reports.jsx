@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { TransactionContext } from "../context/TransactionContext";
+import EmptyState from "../components/common/EmptyState";
+import PageHeader from "../components/common/PageHeader";
 
 function Reports() {
   const { transactions } = useContext(TransactionContext);
@@ -93,9 +95,7 @@ function Reports() {
     <>
       <div className="min-h-screen bg-gray-50 p-5 sm:p-6">
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-blue-800">Reports</h1>
-          </div>
+          <PageHeader title="Reports" />
 
           <input
             type="month"
@@ -155,9 +155,7 @@ function Reports() {
                 </div>
               ))
             ) : (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No expenses for this month.
-              </p>
+               <EmptyState message="No expenses for this month." />
             )}
           </div>
         </div>
@@ -188,9 +186,7 @@ function Reports() {
                 </div>
               ))
             ) : (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No income for this month.
-              </p>
+                <EmptyState message="No income for this month." />
             )}
           </div>
         </div>

@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TransactionContext } from "../context/TransactionContext";
 import { toast } from "react-toastify";
+import EmptyState from "../components/common/EmptyState";
+import { Wallet } from "lucide-react";
+import PageHeader from "../components/common/PageHeader";
 
 function Transactions() {
   const { transactions, setTransactions } = useContext(TransactionContext);
@@ -60,9 +63,7 @@ function Transactions() {
     <>
       <div className="min-h-screen p-6">
         <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-          <div>
-            <h1 className="text-3xl text-blue-800 font-bold">Transactions</h1>
-          </div>
+          <PageHeader title="Transactions" />
 
           <Link
             to="/add-transaction"
@@ -199,12 +200,12 @@ function Transactions() {
                     </tr>
                   ))
                 ) : (
-                  <tr>
-                    <td colSpan="6" className="text-center py-8 text-gray-500">
-                      No transactions found. Add your transaction! or try
-                      changing your filter.
-                    </td>
-                  </tr>
+                   <EmptyState
+                      icon={<Wallet size={32} className="text-blue-600" />}
+                      message="No transactions found. Add your transaction! or try
+                      changing your filter."
+                   >
+                  </EmptyState>               
                 )}
               </tbody>
             </table>
