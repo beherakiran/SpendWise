@@ -9,13 +9,20 @@ import AddTransactions from "./pages/AddTransactions";
 import TransactionProvider from "./context/TransactionProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Login from "./pages/Login"
 
 function App() {
   return (
     <TransactionProvider>
       <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
-        <Route element={<RootLayout />}>
+            <Route path="/login" element={<Login/>} />
+        <Route element={
+           <ProtectedRoute>
+          <RootLayout />
+          </ProtectedRoute>
+          }>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/add-transaction" element={<AddTransactions />} />
