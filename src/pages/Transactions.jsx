@@ -92,6 +92,9 @@ function Transactions() {
               <option value="personal">personal</option>
               <option value="shopping">Shopping</option>
               <option value="travel">Travel</option>
+              <option value="salary">Salary</option>
+              <option value="investment">Investment</option>
+              <option value="other">Other</option>
             </select>
 
             <input

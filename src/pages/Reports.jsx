@@ -94,7 +94,7 @@ function Reports() {
       <div className="min-h-screen bg-gray-50 p-5 sm:p-6">
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <h1 className="text-2xl font-bold text-blue-800">Reports</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-blue-800">Reports</h1>
           </div>
 
           <input

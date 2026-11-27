@@ -33,14 +33,8 @@ function AddTransactions() {
 
     form.reset();
     navigate("/transactions");
-    //console.log(transaction)
   };
 
-  //    useEffect(() => {
-  //   console.log(transactions);
-  // }, [transactions]);
-
-  
 
   const existingTransaction = transactions.find(
     (transaction) => transaction.id === Number(id),
@@ -48,18 +42,18 @@ function AddTransactions() {
 
   return (
     <>
-      <div className="min-h-screen mx-auto p-5 bg-blue-50">
-        <div className="mx-auto max-w-3xl ">
-          <h1 className="mb-6 text-2xl text-center text-blue-800 font-bold">
+      <div className="min-h-screen w-full p-3 sm:p-5">
+        <div className="mx-auto max-w-3xl w-full">
+          <h1 className="mb-6 text-2xl sm:text-2xl text-center text-blue-800 font-bold">
               {id ? "Edit Transaction" : "Add Transaction"}
           </h1>
 
           <form
             onSubmit={handleSubmit}
-            className="w-full rounded-xl border border-blue-100 p-6 shadow-sm space-y-3 bg-white"
+            className="w-full rounded-xl border border-blue-100 p-4 sm:p-6 shadow-sm space-y-3 bg-white"
           >
             <div className="flex flex-col gap-3">
-              <label className="font-medium text-xl" htmlFor="title">
+              <label className="font-medium text-base sm:text-lg" htmlFor="title">
                 Title
               </label>
               <input
@@ -73,7 +67,7 @@ function AddTransactions() {
               />
             </div>
             <div className="flex flex-col gap-3">
-              <label className="font-medium text-xl" htmlFor="amount">
+              <label className="font-medium text-base sm:text-lg" htmlFor="amount">
                 Amount
               </label>
               <input
@@ -89,7 +83,7 @@ function AddTransactions() {
               />
             </div>
             <div className="flex flex-col gap-3">
-              <label htmlFor="type" className="font-medium text-xl">
+              <label htmlFor="type" className="font-medium text-base sm:text-lg">
                 Transaction Type
               </label>
 
@@ -106,7 +100,7 @@ function AddTransactions() {
               </select>
             </div>
             <div className="flex flex-col gap-3">
-              <label className="font-medium text-xl" htmlFor="category">
+              <label className="font-medium text-base sm:text-lg" htmlFor="category">
                 Category
               </label>
               <select
@@ -128,7 +122,7 @@ function AddTransactions() {
               </select>
             </div>
             <div className="flex flex-col gap-3">
-              <label className="font-medium text-xl" htmlFor="date">
+              <label className="font-medium text-base sm:text-lg" htmlFor="date">
                 Date
               </label>
               <input
@@ -142,7 +136,7 @@ function AddTransactions() {
               />
             </div>
             <div className="flex flex-col gap-3">
-              <label className="font-medium text-xl" htmlFor="note">
+              <label className="font-medium text-base sm:text-lg" htmlFor="note">
                 Note
               </label>
               <textarea

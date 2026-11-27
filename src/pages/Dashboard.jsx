@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
+import { useNavigate } from "react-router-dom";
+import { Wallet} from "lucide-react";
 
 function Dashboard() {
   const { transactions, monthlyBudget } = useContext(TransactionContext);
@@ -45,12 +47,12 @@ function Dashboard() {
     return 0;
   });
   const latest = recentTransactions.slice(0, 5);
-
+  const navigate = useNavigate()
   return (
     <>
-      <div className="min-h-screen p-6">
+      <div className="min-h-screen p-3 sm:p-5 lg:p-6 w-full ">
         <div className="mb-8">
-          <h1 className="text-2xl text-blue-800 font-bold">Dashboard</h1>
+          <h1 className="text-xl sm:text-2xl text-blue-800 font-bold">Dashboard</h1>
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -77,10 +79,10 @@ function Dashboard() {
             <h2 className="mt-3 text-2xl font-bold text-red-500">
               -₹{monthlyExpense.toLocaleString("en-IN")}
             </h2>
-          </div>
+          </div> 
         </div>
 
-        <div className="mt-8 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
+        <div className="mt-6 sm:mt-8 rounded-xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-gray-800">
             Monthly Budget
           </h2>
@@ -126,7 +128,7 @@ function Dashboard() {
               {latest.map((transaction) => (
                 <div
                   key={transaction.id}
-                  className="flex flex-col justify-between gap-2 p-5 sm:flex-row sm:items-center"
+                  className="flex flex-col justify-between gap-2 p-4 sm:p-5  sm:flex-row sm:items-center"
                 >
                   <div>
                     <p className="font-medium text-gray-800">
@@ -151,9 +153,22 @@ function Dashboard() {
               ))}
             </div>
           ) : (
+            <div className="flex flex-col items-center justify-center py-6">
+            <div className="bg-blue-50 p-4 rounded-full mb-4">
+               <Wallet size={32} className="text-blue-600" />
+             </div>
+           
             <p className="p-8 text-center text-gray-500">
               No transactions yet. Add your first transaction!
             </p>
+            <button
+              onClick={() => navigate("/add-transaction")}
+              className="mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl
+              font-medium hover:bg-blue-700 transition"
+             >
+              + Add Transaction
+             </button>
+             </div>
           )}
         </div>
       </div>
