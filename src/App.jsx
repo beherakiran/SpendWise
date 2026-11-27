@@ -11,9 +11,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Login from "./pages/Login"
+import AuthProvider from "./context/AuthProvider";
 
 function App() {
   return (
+    <AuthProvider>
     <TransactionProvider>
       <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
@@ -34,6 +36,7 @@ function App() {
         <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </TransactionProvider>
+    </AuthProvider>
   );
 }
 
