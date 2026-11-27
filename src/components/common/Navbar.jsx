@@ -15,7 +15,7 @@ function Navbar({menuOpen,setMenuOpen}) {
   }
   return (
     <>
-      <header className="relative flex justify-end items-center gap-5 bg-white px-6 py-4 border-b border-gray-200 shadow-sm ">
+      <header className=" sticky top-0 z-40 flex justify-end items-center gap-5 bg-white px-6 py-4 border-b border-gray-200 shadow-sm ">
          <button
         onClick={() => setMenuOpen(!menuOpen)}
         className="md:hidden mr-auto text-gray-700"

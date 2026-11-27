@@ -10,11 +10,11 @@ function RootLayout() {
   return (
     <>
     <div className="flex min-h-screen relative">
-       <div className="hidden md:block">
+       <div className="hidden md:block sticky top-0 h-screen shrink-0">
         <Sidebar/>
        </div>
        {menuOpen && (
-         <div className="absolute  top-16 left-0 z-50 md:hidden">
+         <div className="fixed top-16 bottom-0 left-0 z-50 md:hidden overflow-y-auto">
           <Sidebar />
         </div>
       )}
