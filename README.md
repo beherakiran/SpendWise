@@ -21,8 +21,11 @@ SpendWise is a responsive expense management application built using React. It h
 - **Authentication:** Simple name-based login with protected routes.
 - **Local Storage:** Persist application data across page refreshes.
 - **Responsive Design:** Designed for desktop and mobile screens.
+
+
 ## 📁 Project Structure
 
+```text
 src/
 ├── components/
 │   ├── common/
@@ -50,6 +53,7 @@ src/
 │   └── ProtectedRoute.jsx
 ├── App.jsx
 └── main.jsx
+```
 
 ## 🛠️ Technologies Used
 
