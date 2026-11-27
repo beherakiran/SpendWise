@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddTransactions() {
   const { transactions, setTransactions } = useContext(TransactionContext);
@@ -8,8 +9,6 @@ function AddTransactions() {
    const { id } = useParams();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("form submitted");
-
     const form = e.target;
 
     const transaction = {
@@ -32,6 +31,7 @@ function AddTransactions() {
     }
 
     form.reset();
+    toast.success("transaction Added sucessfully")
     navigate("/transactions");
   };
 

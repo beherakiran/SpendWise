@@ -4,13 +4,13 @@ SpendWise is a responsive expense management application built using React. It h
 
 ## 🚀 Live Demo
 
-[View Live Project]()
+[View Live Project](https://spend-wise-black.vercel.app/)
 
 ## 💻 GitHub Repository
 
-[View Source Code]()
+[View Source Code](https://github.com/beherakiran/SpendWise.git)
 
-
+✨ Features
 - **Dashboard:** View total balance, monthly income, monthly expenses, budget usage, and recent transactions.
 - **Transaction Management:** Add, edit, delete, and manage income and expense transactions.
 - **Search and Filters:** Search transactions by note and filter by category and month.
@@ -73,23 +73,23 @@ Add your project screenshots below:
 
 ### Login Page
 
-![Login Page]()
+![Login Page](./src/assets/screenshots/login.png)
 
 ### Dashboard
 
-![Dashboard]()
+![Dashboard](./src/assets/screenshots/dashboard.png)
 
 ### Transactions
 
-![Transactions]()
+![Transactions](./src/assets/screenshots/transactions.png)
 
 ### Reports
 
-![Reports]()
+![Reports](./src/assets/screenshots/reports.png)
 
 ### Settings
 
-![Settings]()
+![Settings](./src/assets/screenshots/settings.png)
 
 
 
