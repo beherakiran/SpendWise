@@ -200,12 +200,16 @@ function Transactions() {
                     </tr>
                   ))
                 ) : (
+                  <tr>
+                     <td colSpan="6" className="text-center">
                    <EmptyState
                       icon={<Wallet size={32} className="text-blue-600" />}
                       message="No transactions found. Add your transaction! or try
                       changing your filter."
                    >
-                  </EmptyState>               
+                  </EmptyState>  
+                  </td> 
+                  </tr>            
                 )}
               </tbody>
             </table>

@@ -33,7 +33,7 @@ function Sidebar() {
   ];
   return (
     <>
-    <aside className="w-64 min-h-screen bg-white border-r shadow-sm p-5 border-blue-200">
+    <aside className="w-64 min-h-screen h-full bg-white border-r shadow-sm p-5 border-blue-200">
      <div className="flex items-center gap-3 mb-12 px-2">
        <div className="bg-blue-600 p-2.5 rounded-xl">
           <Wallet size={24} className="text-white" />

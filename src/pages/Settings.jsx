@@ -155,6 +155,12 @@ function Settings() {
                 {loading ? "Converting..." : "Convert Balance"}
               </button>
             </div>
+            {loading && (
+               <div className="md:col-span-2 animate-pulse rounded-lg border border-gray-200 bg-gray-50 p-4">
+               <div className="h-4 w-36 rounded bg-gray-200"></div>
+               <div className="mt-3 h-7 w-48 rounded bg-gray-200"></div>
+              </div>
+               )}
             {error && (
               <p className="md:col-span-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">
                 {error}

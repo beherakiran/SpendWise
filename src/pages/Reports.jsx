@@ -93,7 +93,7 @@ function Reports() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 p-5 sm:p-6">
+      <div className="min-h-screen p-5 sm:p-6">
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <PageHeader title="Reports" />
 

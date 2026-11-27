@@ -1,16 +1,96 @@
-# React + Vite
+# SpendWise – Expense Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SpendWise is a responsive expense management application built using React. It helps users track their income and expenses, manage monthly budgets, and understand their spending habits through reports and category-wise breakdowns.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[View Live Project]()
 
-## React Compiler
+## 💻 GitHub Repository
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+[View Source Code]()
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Dashboard:** View total balance, monthly income, monthly expenses, budget usage, and recent transactions.
+- **Transaction Management:** Add, edit, delete, and manage income and expense transactions.
+- **Search and Filters:** Search transactions by note and filter by category and month.
+- **Sorting:** Sort transactions by amount and date.
+- **Reports:** View monthly income, expenses, savings, and category-wise breakdowns.
+- **Monthly Budget:** Set a monthly spending limit with a visual progress bar and warning when 80% of the budget is reached.
+- **Currency Conversion:** Convert the current balance from INR to USD or EUR using the Frankfurter API.
+- **Authentication:** Simple name-based login with protected routes.
+- **Local Storage:** Persist application data across page refreshes.
+- **Responsive Design:** Designed for desktop and mobile screens.
+
+## 🛠️ Technologies Used
+
+- React.js
+- Vite
+- JavaScript
+- Tailwind CSS
+- React Router DOM
+- Context API
+- Custom Hooks
+- Local Storage
+- Frankfurter API
+- Lucide React
+- React Toastify   
+
+## ⚙️ Installation and Setup
+
+Follow these steps to run the project locally.
+
+**1. Clone the repository**
+git clone YOUR_GITHUB_REPOSITORY_LINK
+
+**2. Navigate to the project folder**
+cd SpendWise
+
+**3. Install dependencies**
+npm install
+
+**4. Start the development server**
+npm run dev
+
+**5. Open the application**
+
+Visit the local URL displayed in your terminal, usually:
+http://localhost:5173
+
+
+## 🌐 API Integration
+
+SpendWise uses the [Frankfurter API](https://www.frankfurter.dev/) to retrieve exchange rates.
+
+- Base currency: INR
+- Supported conversion currencies: USD and EUR
+- Displays converted balance.
+- Handles API loading and error states.
+
+## 📸 Screenshots
+
+Add your project screenshots below:
+
+### Login Page
+
+![Login Page]()
+
+### Dashboard
+
+![Dashboard]()
+
+### Transactions
+
+![Transactions]()
+
+### Reports
+
+![Reports]()
+
+### Settings
+
+![Settings]()
+
+
+
+
