@@ -10,7 +10,7 @@ SpendWise is a responsive expense management application built using React. It h
 
 [View Source Code](https://github.com/beherakiran/SpendWise.git)
 
-✨ Features
+## ✨ Features
 - **Dashboard:** View total balance, monthly income, monthly expenses, budget usage, and recent transactions.
 - **Transaction Management:** Add, edit, delete, and manage income and expense transactions.
 - **Search and Filters:** Search transactions by note and filter by category and month.
@@ -21,6 +21,35 @@ SpendWise is a responsive expense management application built using React. It h
 - **Authentication:** Simple name-based login with protected routes.
 - **Local Storage:** Persist application data across page refreshes.
 - **Responsive Design:** Designed for desktop and mobile screens.
+## 📁 Project Structure
+
+src/
+├── components/
+│   ├── common/
+│   │   ├── EmptyState.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── PageHeader.jsx
+│   │   └── Sidebar.jsx
+│   └── layout/
+│       └── RootLayout.jsx
+├── context/
+│   ├── AuthContext.jsx
+│   ├── AuthProvider.jsx
+│   ├── TransactionContext.jsx
+│   └── TransactionProvider.jsx
+├── hooks/
+│   └── useLocalStorage.js
+├── pages/
+│   ├── Dashboard.jsx
+│   ├── Transactions.jsx
+│   ├── AddTransactions.jsx
+│   ├── Reports.jsx
+│   ├── Settings.jsx
+│   └── Login.jsx
+├── routes/
+│   └── ProtectedRoute.jsx
+├── App.jsx
+└── main.jsx
 
 ## 🛠️ Technologies Used
 
@@ -41,7 +70,7 @@ SpendWise is a responsive expense management application built using React. It h
 Follow these steps to run the project locally.
 
 **1. Clone the repository**
-git clone YOUR_GITHUB_REPOSITORY_LINK
+git clone https://github.com/beherakiran/SpendWise.git
 
 **2. Navigate to the project folder**
 cd SpendWise

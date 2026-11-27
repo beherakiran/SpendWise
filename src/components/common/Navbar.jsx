@@ -30,7 +30,7 @@ function Navbar({menuOpen,setMenuOpen}) {
       />
       </div>
       <span className="text-base font-semibold text-blue-800">
-        {user?.name}..
+        {user?.name}
       </span>
     
       <button
